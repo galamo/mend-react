@@ -1,4 +1,9 @@
 import settings from "./settings.json";
+import { calculateTax } from "./calculateTax";
+
+console.log(`new price is: ${calculateTax({ price: "40$", tax: 2 })}`);
+console.log(`new price is: ${calculateTax({ price: 40, tax: 2 })}`);
+
 const data: string = "Mend Scan";
 
 type Settings = typeof settings;
@@ -75,6 +80,3 @@ function getApiData(book: Book): Book & WithId {
   // saved in database
   return { ...book, id: "New Id From Api" };
 }
-
-
-

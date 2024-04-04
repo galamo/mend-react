@@ -119,8 +119,6 @@ console.log(`new price is: ${calculateTax({ price: 40, tax: 2 })}`);
 
 - create a function that receive Array of products and product name Or id ( one of products properties ) and return all the products that equal to the relevant name Or id
 
-- Create a function calculateTax that receive
-
 ##### Generics
 
 ```typescript

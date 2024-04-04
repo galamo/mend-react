@@ -15,6 +15,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var settings_json_1 = __importDefault(require("./settings.json"));
+var calculateTax_1 = require("./calculateTax");
+console.log("new price is: ".concat((0, calculateTax_1.calculateTax)({ price: "40$", tax: 2 })));
+console.log("new price is: ".concat((0, calculateTax_1.calculateTax)({ price: 40, tax: 2 })));
 var data = "Mend Scan";
 function setConfiguration(config) {
     console.log(config.localTime);
