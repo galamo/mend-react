@@ -50,3 +50,20 @@ function extraInfo(p: Person) {
   }
   return additionalInfo;
 }
+
+function extraInfoUsingIs(p: Person) {
+  let additionalInfo: string = "";
+  if (isAdmin(p)) {
+    additionalInfo = p.role;
+  } else if ("permission" in p) {
+    additionalInfo = p.permission;
+  }
+  return additionalInfo;
+}
+
+function isAdmin(p: Person): p is Admin {
+  return p.type.toLowerCase() === "admin";
+}
+function isUSer(p: Person): p is User {
+  return p.type.toLowerCase() === "user";
+}

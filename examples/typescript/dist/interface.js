@@ -36,3 +36,19 @@ function extraInfo(p) {
     }
     return additionalInfo;
 }
+function extraInfoUsingIs(p) {
+    var additionalInfo = "";
+    if (isAdmin(p)) {
+        additionalInfo = p.role;
+    }
+    else if ("permission" in p) {
+        additionalInfo = p.permission;
+    }
+    return additionalInfo;
+}
+function isAdmin(p) {
+    return p.type.toLowerCase() === "admin";
+}
+function isUSer(p) {
+    return p.type.toLowerCase() === "user";
+}
