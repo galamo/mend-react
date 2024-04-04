@@ -21,3 +21,31 @@ function getScanResultStats(
 }
 
 getScanResultStats(scanResult, "priorities");
+
+function filterScans(
+  scans: Array<ScanResult>,
+  key: keyof ScanResult,
+  value: string
+) {
+  if (!Array.isArray(scans)) return;
+  return scans.filter(
+    (currentScan) =>
+      (currentScan[key] as string)?.toLowerCase() === value.toLowerCase()
+  );
+}
+
+type ScanResultFilter = Omit<
+  ScanResult,
+  "numberOfVulnerabilities" | "packages" | "priorities"
+>;
+
+function filterScansWithOmit(
+  scans: Array<ScanResult>,
+  key: keyof ScanResultFilter,
+  value: string
+) {
+  if (!Array.isArray(scans)) return;
+  return scans.filter(
+    (currentScan) => currentScan[key]?.toLowerCase() === value.toLowerCase()
+  );
+}
