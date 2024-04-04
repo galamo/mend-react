@@ -12,19 +12,18 @@ function getDataFromApi(packagesLimit) {
     }, 4000);
   });
 }
-getDataFromApi(10)
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
-getDataFromApi("this is wrong input")
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => {
+async function init() {
+  try {
+    console.log("init");
+    const result = await getDataFromApi(20);
+    console.log("after the api call.", result);
+    const result2 = await getDataFromApi("this is wrong");
+    console.log("after the api call.", result2);
+  } catch (error) {
     console.log(error);
-  });
-console.log("Script End");
+  }
+}
+init();
+init();
+console.log("Script end");

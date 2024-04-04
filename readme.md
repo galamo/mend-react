@@ -59,6 +59,10 @@
 
 - async operation
 
+1. callbacks
+2. promise
+3. async await
+
 ### Typescript
 
 - `npm init -y` - create new module based on the folder name
