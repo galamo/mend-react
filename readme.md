@@ -100,6 +100,27 @@
 
 ##### Class
 
+##### Multiple Types
+
+###### Narrow down type - interface
+
+###### String literal
+
+###### Ex_calculateTax
+
+- Create a function calculateTax that receive a number or string and can calculate according the value the tax
+
+```javascript
+console.log(`new price is: ${calculateTax({ price: "40$", tax: 2 })}`);
+console.log(`new price is: ${calculateTax({ price: 40, tax: 2 })}`);
+```
+
+###### Ex_keyof
+
+- create a function that receive Array of products and product name Or id ( one of products properties ) and return all the products that equal to the relevant name Or id
+
+- Create a function calculateTax that receive
+
 ##### Generics
 
 ```typescript

@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "tsc",
     "compile-watch": "tsc --watch",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./dist/index.js"
   },
   "keywords": [],
   "author": "",
