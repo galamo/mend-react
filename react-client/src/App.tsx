@@ -1,14 +1,34 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import "./App.css";
-import { Country } from "./components/country";
+// import { Country } from "./components/country";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SingleUser, UserCard } from "./components/user";
+import Button from "@mui/material/Button";
+
+//  new Type
+type WithLoadingProps = {
+  isLoading: boolean;
+};
+function withLoading<T extends WithLoadingProps>(
+  WrappedComponent: React.FunctionComponent<T>
+) {
+  return function (props: T) {
+    const { isLoading } = props;
+    return isLoading ? <CircularProgress /> : <WrappedComponent {...props} />;
+  };
+}
+type UsersProps = {
+  users: Array<SingleUser>;
+};
+const UsersListWithLoading = withLoading<UsersProps & WithLoadingProps>(
+  UsersList
+);
 
 const url = "https://randomuser.me/api?results=10";
 function App() {
   const [userName, setUserName] = useState("");
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<Array<SingleUser>>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -30,12 +50,12 @@ function App() {
     };
   }, []);
 
-  if (isLoading)
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div>
+  //       <CircularProgress />
+  //     </div>
+  //   );
 
   const filteredUsers = users.filter((user: SingleUser) => {
     return user?.name?.first.toLowerCase().includes(userName.toLowerCase());
@@ -50,6 +70,16 @@ function App() {
           }}
           type="text"
         />
+
+        <Button
+          onClick={() => {
+            const sortedUsers = users.sort((a, b) => b.dob.age - a.dob.age);
+            console.log(sortedUsers);
+            setUsers([...sortedUsers]);
+          }}
+        >
+          Sort by age
+        </Button>
       </div>
       <div
         style={{
@@ -59,18 +89,25 @@ function App() {
           gap: 10,
         }}
       >
-        {Array.isArray(filteredUsers) &&
-          filteredUsers.map((singleUser: SingleUser) => {
-            return (
-              <UserCard
-                key={`${singleUser.name.first}-${singleUser.name.last}`}
-                user={singleUser}
-              />
-            );
-          })}
+        <UsersListWithLoading users={filteredUsers} isLoading={isLoading} />
       </div>
     </>
   );
 }
 
+function UsersList(props: { users: Array<SingleUser> }) {
+  return (
+    <>
+      {Array.isArray(props.users) &&
+        props.users.map((singleUser: SingleUser) => {
+          return (
+            <UserCard
+              key={`${singleUser.name.first}-${singleUser.name.last}`}
+              user={singleUser}
+            />
+          );
+        })}
+    </>
+  );
+}
 export default App;

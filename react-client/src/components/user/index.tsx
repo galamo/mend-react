@@ -14,7 +14,7 @@ export function UserCard(props: { user: SingleUser }) {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = props;
   return (
-    <Card  sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {user?.name?.first}
@@ -30,7 +30,7 @@ export function UserCard(props: { user: SingleUser }) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {user.phone}
         </Typography>
-        <Typography variant="body2"></Typography>
+        <Typography variant="body2">{user.dob.age}</Typography>
       </CardContent>
       <CardActions>
         <div
