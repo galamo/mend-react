@@ -7,7 +7,7 @@ var jwt = require("jsonwebtoken");
 const axios = require("axios");
 const bodyParser = require("body-parser");
 NODE_TLS_REJECT_UNAUTHORIZED = 0;
-
+const data = require("./data.json");
 const app = express();
 app.use(cors());
 setTimeout(() => {
@@ -50,6 +50,15 @@ app.get("/countries", async (req, res, next) => {
     return next(error);
   }
 });
+
+app.get("/countries/data", async (req, res, next) => {
+  try {
+    return res.json({ data });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 let delayName = 0;
 app.get("/countries-delay/name/:name", async (req, res, next) => {
   delayName++;

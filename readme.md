@@ -284,11 +284,11 @@ npm run dev
 
 #### Ex_Render_list_Items_1
 
-- Create users Page Component
-- Create User component - card.
-- Use the following Api: https://randomuser.me/api/?results=10
+- Create Country Page Component
+- Create Country component - card ( show the country name, flag, population ,area)
+- Use the following Api: http://localhost:2200/countries/data
 - Present the results in a list.
-- Add a filter button for male/female
+- Add Sorting Buttons - sort by area, sort by population
 
 #### Ex_Render_list_Items_2
 

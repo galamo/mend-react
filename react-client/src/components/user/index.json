@@ -1,0 +1,39 @@
+[
+  {
+    "gender": "male",
+    "name": { "title": "Mr", "first": "Juan", "last": "Daniels" },
+    "location": {
+      "street": { "number": 2964, "name": "W Belt Line Rd" },
+      "city": "Lakeland",
+      "state": "Wyoming",
+      "country": "United States",
+      "postcode": 60388,
+      "coordinates": { "latitude": "82.0795", "longitude": "-116.4556" },
+      "timezone": {
+        "offset": "+10:00",
+        "description": "Eastern Australia, Guam, Vladivostok"
+      }
+    },
+    "email": "juan.daniels@example.com",
+    "login": {
+      "uuid": "83f4e7f8-4fef-4533-8670-584212d5b62e",
+      "username": "heavybird394",
+      "password": "hillary",
+      "salt": "t030uolF",
+      "md5": "6ecf40b4f89a23e249c34e4fa71b80b0",
+      "sha1": "347e5622b7fbf77d2f836742b0ef11ad5648293a",
+      "sha256": "ed4b494b5a3d5fdab5e3be125f4e40856685f0eeff2046d1998d1ae8a15b0b3b"
+    },
+    "dob": { "date": "1973-01-25T13:50:33.541Z", "age": 51 },
+    "registered": { "date": "2007-11-12T18:54:32.781Z", "age": 16 },
+    "phone": "(218) 474-1920",
+    "cell": "(724) 597-7206",
+    "id": { "name": "SSN", "value": "635-53-1570" },
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/14.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/14.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/14.jpg"
+    },
+    "nat": "US"
+  }
+]
