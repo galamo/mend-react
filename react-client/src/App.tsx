@@ -1,34 +1,56 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import "./App.css";
+// import "./App.css";
 // import { Country } from "./components/country";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import UsersPage from "./components/usersPage";
+import Countries from "./components/countriesPage";
+
+import MainNavigation from "./navigation/MainNavigation";
+import Home from "./components/home";
 
 const router = createBrowserRouter([
-  { path: "/users", element: <UsersPage /> },
-  { path: "/test", element: <div>Test!</div> },
+  {
+    path: "/",
+    element: <RootLayout />,
+
+    children: [
+      {
+        path: "/users",
+        element: <UsersPage />,
+      },
+      {
+        path: "/countries",
+        element: <Countries />,
+      },
+      {
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        path: "*",
+        element: <div>Not found component</div>,
+      },
+    ],
+  },
 ]);
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <h1>
-          <Link to="/test">Click here</Link>
-        </h1>
-        <h1>
-          <Link to="/users">sss</Link>
-        </h1>
-        <RouterProvider router={router} />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </>
   );
 }
 
+function RootLayout() {
+  return (
+    <>
+      <MainNavigation />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
+}
 export default App;

@@ -1,6 +1,4 @@
 import { useState, useEffect, ChangeEvent } from "react";
-// import "./App.css";
-// import { Country } from "./components/country";
 import axios from "axios";
 import { SingleUser, UserCard } from "../user/index";
 import Button from "@mui/material/Button";
@@ -13,44 +11,52 @@ const UsersListWithLoading = withLoading<UsersProps & WithLoadingProps>(
   UsersList
 );
 
-const url = "https://randomuser.me/api?results=10";
-function UsersPage() {
-  const [userName, setUserName] = useState("");
-  const [users, setUsers] = useState<Array<SingleUser>>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
+function useAsyncApi<T>(fetchFunction: any, initialValue: T) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<{ errorMessage: string }>({
+    errorMessage: "",
+  });
+  const [data, setData] = useState(initialValue);
   useEffect(() => {
-    async function getUsers() {
+    async function fetchData() {
       try {
-        const result = await axios.get(url);
-        const { data } = result;
-        setUsers(data.results);
-      } catch (error) {
-        console.log(error);
+        console.log("this is useApi");
+        setIsLoading(true);
+        const result = await fetchFunction();
+        setData(result);
+      } catch (error: any) {
+        setError({ errorMessage: error.message || "Default Error" });
       } finally {
         setIsLoading(false);
       }
     }
-    getUsers();
-
+    fetchData();
     return () => {
-      // clean up
+      console.log("clean up useAsyncApi ");
     };
-  }, []);
+  }, [fetchFunction]);
 
-  // if (isLoading)
-  //   return (
-  //     <div>
-  //       <CircularProgress />
-  //     </div>
-  //   );
+  return { isLoading, data, error };
+}
 
+async function getUsersApi() {
+  const url = "https://randomuser.me/api?results=10";
+  const result = await axios.get(url);
+  return result.data.results;
+}
+function UsersPage() {
+  const [userName, setUserName] = useState("");
+
+  const { isLoading, data, error } = useAsyncApi<Array<SingleUser>>(
+    getUsersApi,
+    []
+  );
+  const users = (Array.isArray(data) && data) || [];
   const filteredUsers = users.filter((user: SingleUser) => {
     return user?.name?.first.toLowerCase().includes(userName.toLowerCase());
   });
   return (
     <>
-      {/* <RouterProvider router={router} />; */}
       <div>
         <h1> Users {userName}</h1>
         <input
@@ -59,12 +65,12 @@ function UsersPage() {
           }}
           type="text"
         />
-
+        {error.errorMessage ? error.errorMessage : null}
         <Button
           onClick={() => {
             const sortedUsers = users.sort((a, b) => b.dob.age - a.dob.age);
             console.log(sortedUsers);
-            setUsers([...sortedUsers]);
+            // setUsers([...sortedUsers]);
           }}
         >
           Sort by age
