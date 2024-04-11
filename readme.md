@@ -282,7 +282,15 @@ npm run dev
 3. Create a withHover HOC behavior that will wrap components 1+2 and will give the ability to
    highlight the component ( change the background to selected color onMouseOver )
 
-#### Ex_Render_list_Items
+#### Ex_Render_list_Items_1
+
+- Create users Page Component
+- Create User component - card.
+- Use the following Api: https://randomuser.me/api/?results=10
+- Present the results in a list.
+- Add a filter button for male/female
+
+#### Ex_Render_list_Items_2
 
 - create a button which support sorting countries by area key, desc.
 
