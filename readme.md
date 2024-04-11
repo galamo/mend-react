@@ -268,6 +268,24 @@ npm run dev
 
 #### Conditional rendering
 
+#### Alternative Props Concepts
+
+- explicit key
+- {...} spread operator
+
+#### Render props
+
+#### Ex_HOC
+
+1. Create a component called <TextComponent> - props: text: string
+2. Create a component called <InputComponent>
+3. Create a withHover HOC behavior that will wrap components 1+2 and will give the ability to
+   highlight the component ( change the background to selected color onMouseOver )
+
+#### Ex_Render_list_Items
+
+- create a button which support sorting countries by area key, desc.
+
 #### Keys
 
 #### Lifting State up
@@ -281,6 +299,19 @@ npm run dev
 - useCallback
 - useContext
 - useReducer
+
+## Controled vs unControled components
+
+## Ref
+
+## Portals
+
+`createPortal(children, domNode, key?)`
+
+1. Rendering to a different part of the DOM
+2. Rendering a modal dialog with a portal
+3. Rendering React components into non-React server markup
+4. Rendering React components into non-React DOM nodes
 
 ## Advanced
 
