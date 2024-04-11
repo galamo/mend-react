@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import { ImageComponent } from "../imageComponent";
 
 export type SingleUser = (typeof UserJson)[0];
 
@@ -20,12 +21,8 @@ export function UserCard(props: { user: SingleUser }) {
           {user?.name?.first}
           {user?.name?.last}
         </Typography>
-        <CardMedia
-          component="img"
-          height="194"
-          image={user?.picture?.large}
-          alt="Paella dish"
-        />
+        <ImageComponent  image={user?.picture?.large}/>
+       
         <Typography variant="h5" component="div"></Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {user.phone}
