@@ -9,6 +9,7 @@ import CountriesPage from "./components/countriesPage";
 import MainNavigation from "./navigation/MainNavigation";
 import Home from "./components/home";
 import SearchCountriesPage from "./components/searchCountriesPage";
+import CountriesPageSuspense, { loader } from "./components/countriesPageSuspense";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
       {
         path: "/countries",
         element: <CountriesPage />,
+      },
+      {
+        path: "/countries-loader",
+        element: <CountriesPageSuspense />,
+        loader: loader,
       },
       {
         path: "/home",
