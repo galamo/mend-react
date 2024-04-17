@@ -314,7 +314,7 @@ npm run dev
 
 - useApi
 - useImage
-- slow network bug
+- slow network bug ( debounce, isActive)
 
 ## Controled vs unControled components
 
