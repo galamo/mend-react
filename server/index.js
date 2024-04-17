@@ -33,7 +33,7 @@ app.get("/users", async (req, res, next) => {
 
 app.get("/countries-delay", async (req, res, next) => {
   try {
-    const { data } = await axios.get("https://restcountries.com/v3.1/all");
+    // const { data } = await axios.get("https://restcountries.com/v3.1/all");
     setTimeout(() => {
       return res.json({ data });
     }, 4000);
@@ -64,15 +64,18 @@ app.get("/countries-delay/name/:name", async (req, res, next) => {
   delayName++;
 
   try {
-    const { data } = await axios.get(
-      `https://restcountries.com/v3.1/name/${req.params.name}`
+    const d = data.filter((c) =>
+      c.name.common.toLowerCase().includes(req.params.name)
     );
+    // const { data } = await axios.get(
+    //   `https://restcountries.com/v3.1/name/${req.params.name}`
+    // );
     if (delayName % 2 === 0) {
       setTimeout(() => {
-        return res.json({ data });
+        return res.json({ data: d });
       }, 6000);
     } else {
-      return res.json({ data });
+      return res.json({ data: d });
     }
   } catch (error) {
     return next(error);

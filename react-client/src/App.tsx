@@ -8,6 +8,7 @@ import CountriesPage from "./components/countriesPage";
 
 import MainNavigation from "./navigation/MainNavigation";
 import Home from "./components/home";
+import SearchCountriesPage from "./components/searchCountriesPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
         path: "/home",
         element: <Home />,
       },
+      {
+        path: "/search-countries",
+        element: <SearchCountriesPage />,
+      },
+
       {
         path: "*",
         element: <div>Not found component</div>,
