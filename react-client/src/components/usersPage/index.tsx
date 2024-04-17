@@ -1,10 +1,9 @@
 import { useState, useEffect, ChangeEvent } from "react";
-// import "./App.css";
-// import { Country } from "./components/country";
 import axios from "axios";
 import { SingleUser, UserCard } from "../user/index";
 import Button from "@mui/material/Button";
 import { WithLoadingProps, withLoading } from "../hoc/withLoading";
+import { useAsyncApi } from "../../hooks/useApi";
 
 type UsersProps = {
   users: Array<SingleUser>;
@@ -13,44 +12,24 @@ const UsersListWithLoading = withLoading<UsersProps & WithLoadingProps>(
   UsersList
 );
 
-const url = "https://randomuser.me/api?results=10";
-function UsersPage() {
+async function getUsersApi() {
+  const url = "https://randomuser.me/api?results=10";
+  const result = await axios.get(url);
+  return result.data.results;
+}
+function CountriesPage() {
   const [userName, setUserName] = useState("");
-  const [users, setUsers] = useState<Array<SingleUser>>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function getUsers() {
-      try {
-        const result = await axios.get(url);
-        const { data } = result;
-        setUsers(data.results);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getUsers();
-
-    return () => {
-      // clean up
-    };
-  }, []);
-
-  // if (isLoading)
-  //   return (
-  //     <div>
-  //       <CircularProgress />
-  //     </div>
-  //   );
-
+  const { isLoading, data, error } = useAsyncApi<Array<SingleUser>>(
+    getUsersApi,
+    []
+  );
+  const users = (Array.isArray(data) && data) || [];
   const filteredUsers = users.filter((user: SingleUser) => {
     return user?.name?.first.toLowerCase().includes(userName.toLowerCase());
   });
   return (
     <>
-      {/* <RouterProvider router={router} />; */}
       <div>
         <h1> Users {userName}</h1>
         <input
@@ -59,12 +38,12 @@ function UsersPage() {
           }}
           type="text"
         />
-
+        {error.errorMessage ? error.errorMessage : null}
         <Button
           onClick={() => {
             const sortedUsers = users.sort((a, b) => b.dob.age - a.dob.age);
             console.log(sortedUsers);
-            setUsers([...sortedUsers]);
+            // setUsers([...sortedUsers]);
           }}
         >
           Sort by age
@@ -99,4 +78,4 @@ function UsersList(props: { users: Array<SingleUser> }) {
     </>
   );
 }
-export default UsersPage;
+export default CountriesPage;

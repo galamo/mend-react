@@ -4,7 +4,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import UsersPage from "./components/usersPage";
-import Countries from "./components/countriesPage";
+import CountriesPage from "./components/countriesPage";
 
 import MainNavigation from "./navigation/MainNavigation";
 import Home from "./components/home";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/countries",
-        element: <Countries />,
+        element: <CountriesPage />,
       },
       {
         path: "/home",

@@ -33,7 +33,7 @@ function MainNavigation() {
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <NavLink style={{ color: "white" }} to="/countries">
-              countries as users
+              countries
             </NavLink>
           </Typography>
           <Button color="inherit">Login</Button>

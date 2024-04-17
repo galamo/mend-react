@@ -1,108 +1,53 @@
-import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
-import { SingleUser, UserCard } from "../user/index";
-import Button from "@mui/material/Button";
-import { WithLoadingProps, withLoading } from "../hoc/withLoading";
+import { SingleUser } from "../user/index";
+import { withLoading } from "../hoc/withLoading";
+import { useAsyncApi } from "../../hooks/useApi";
+import countryObj from "./type.json";
+type CountryType = typeof countryObj;
 
-type UsersProps = {
-  users: Array<SingleUser>;
-};
-const UsersListWithLoading = withLoading<UsersProps & WithLoadingProps>(
-  UsersList
-);
+const CountriesListWithLoading = withLoading<any>(CountriesList);
 
-function useAsyncApi<T>(fetchFunction: any, initialValue: T) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<{ errorMessage: string }>({
-    errorMessage: "",
-  });
-  const [data, setData] = useState(initialValue);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        console.log("this is useApi");
-        setIsLoading(true);
-        const result = await fetchFunction();
-        setData(result);
-      } catch (error: any) {
-        setError({ errorMessage: error.message || "Default Error" });
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchData();
-    return () => {
-      console.log("clean up useAsyncApi ");
-    };
-  }, [fetchFunction]);
-
-  return { isLoading, data, error };
-}
-
-async function getUsersApi() {
-  const url = "https://randomuser.me/api?results=10";
+async function getCountriesApi() {
+  const url = "http://localhost:2200/countries/data";
   const result = await axios.get(url);
-  return result.data.results;
+  return result.data.data;
 }
-function UsersPage() {
-  const [userName, setUserName] = useState("");
-
+function CountriesPage() {
   const { isLoading, data, error } = useAsyncApi<Array<SingleUser>>(
-    getUsersApi,
+    getCountriesApi,
     []
   );
-  const users = (Array.isArray(data) && data) || [];
-  const filteredUsers = users.filter((user: SingleUser) => {
-    return user?.name?.first.toLowerCase().includes(userName.toLowerCase());
-  });
+  if (error.errorMessage)
+    return <h1 style={{ textAlign: "center" }}> {error.errorMessage} </h1>;
   return (
     <>
-      <div>
-        <h1> Users {userName}</h1>
-        <input
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setUserName(event.target.value);
-          }}
-          type="text"
-        />
-        {error.errorMessage ? error.errorMessage : null}
-        <Button
-          onClick={() => {
-            const sortedUsers = users.sort((a, b) => b.dob.age - a.dob.age);
-            console.log(sortedUsers);
-            // setUsers([...sortedUsers]);
-          }}
-        >
-          Sort by age
-        </Button>
-      </div>
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
           flexWrap: "wrap",
-          gap: 10,
+          gap: 3,
+          justifyContent: "center",
         }}
       >
-        <UsersListWithLoading users={filteredUsers} isLoading={isLoading} />
+        <CountriesListWithLoading users={data} isLoading={isLoading} />
       </div>
     </>
   );
 }
 
-function UsersList(props: { users: Array<SingleUser> }) {
+function CountriesList(props: { users: Array<CountryType> }) {
   return (
     <>
       {Array.isArray(props.users) &&
-        props.users.map((singleUser: SingleUser) => {
+        props.users.map((c: CountryType) => {
           return (
-            <UserCard
-              key={`${singleUser.name.first}-${singleUser.name.last}`}
-              user={singleUser}
-            />
+            <div style={{ width: "20%", padding: "10px", textAlign: "center" }}>
+              <h6>{c?.name.official}</h6>
+              <img height={150} width={150} src={c?.flags?.png} alt="" />
+            </div>
           );
         })}
     </>
   );
 }
-export default UsersPage;
+export default CountriesPage;
