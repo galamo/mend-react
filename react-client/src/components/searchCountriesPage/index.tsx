@@ -8,8 +8,8 @@ type CountryType = typeof countryObj;
 
 const CountriesListWithLoading = withLoading<any>(CountriesList);
 
-async function getCountriesApi() {
-  const url = `http://localhost:2200/countries/data`;
+async function getCountriesApi(s: string) {
+  const url = `http://localhost:2200/countries/search?name=${s}`;
   const result = await axios.get(url);
   return result.data.data;
 }
@@ -17,7 +17,8 @@ function SearchCountriesPage() {
   const [search, setSearch] = useState("");
   const { isLoading, data, error } = useAsyncApi<Array<CountryType>>(
     getCountriesApi,
-    []
+    [],
+    search
   );
 
   if (error.errorMessage)
