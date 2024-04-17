@@ -2,14 +2,22 @@ import { useState, useEffect, ChangeEvent } from "react";
 // import "./App.css";
 // import { Country } from "./components/country";
 
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  useRouteError,
+} from "react-router-dom";
 import UsersPage from "./components/usersPage";
 import CountriesPage from "./components/countriesPage";
 
 import MainNavigation from "./navigation/MainNavigation";
 import Home from "./components/home";
 import SearchCountriesPage from "./components/searchCountriesPage";
-import CountriesPageSuspense, { loader } from "./components/countriesPageSuspense";
+import CountriesPageSuspense, {
+  loadCountries,
+  loader,
+} from "./components/countriesPageSuspense";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: "/countries-loader",
         element: <CountriesPageSuspense />,
-        loader: loader,
+        loader: loadCountries,
       },
       {
         path: "/home",
@@ -66,3 +74,10 @@ function RootLayout() {
   );
 }
 export default App;
+
+function ErrorBoundary() {
+  let error = useRouteError();
+  console.error(error);
+  // Uncaught ReferenceError: path is not defined
+  return <div>Dang!</div>;
+}

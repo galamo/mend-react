@@ -15,14 +15,14 @@ async function getCountriesApi() {
   return result.data.data;
 }
 function CountriesPageSuspense() {
-  const { data } = useLoaderData();
+  const res = useLoaderData();
   // const { isLoading, data, error } = useAsyncApi<Array<SingleUser>>(
   //   getCountriesApi,
   //   []
   // );
   return (
     <>
-      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+      {/* <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
         <Await resolve={data}>
           {(resolvedCountries) => (
             <div
@@ -32,12 +32,12 @@ function CountriesPageSuspense() {
                 gap: 3,
                 justifyContent: "center",
               }}
-            >
-              <CountriesList countries={resolvedCountries} />
-            </div>
+            > */}
+      <CountriesList countries={res} />
+      {/* </div>
           )}
         </Await>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 }
@@ -60,7 +60,7 @@ function CountriesList(props: { countries: Array<CountryType> }) {
 }
 export default CountriesPageSuspense;
 
-async function loadCountries() {
+export async function loadCountries() {
   const response = await fetch("http://localhost:2200/countries-delay");
 
   if (!response.ok) {
@@ -79,10 +79,4 @@ async function loadCountries() {
     console.log(resData.data);
     return resData.data;
   }
-}
-
-export function loader() {
-  return defer({
-    data: loadCountries(),
-  });
 }
