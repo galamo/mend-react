@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 export function useAsyncApi<T>(
   fetchFunction: any,
   initialValue: T,
@@ -10,14 +11,11 @@ export function useAsyncApi<T>(
   });
   const [data, setData] = useState(initialValue);
   useEffect(() => {
-    let isActive = true;
     async function fetchData() {
       try {
         setIsLoading(true);
         const result = await fetchFunction(dep);
-        if (isActive) {
-          setData(result);
-        }
+        setData(result);
       } catch (error: any) {
         setError({ errorMessage: error.message || "Default Error" });
       } finally {
@@ -27,7 +25,6 @@ export function useAsyncApi<T>(
     fetchData();
     return () => {
       console.log("clean up useAsyncApi ");
-      isActive = false;
     };
   }, [fetchFunction, dep]);
 

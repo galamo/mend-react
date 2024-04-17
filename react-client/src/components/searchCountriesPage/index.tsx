@@ -4,6 +4,8 @@ import { SingleUser } from "../user/index";
 import { withLoading } from "../hoc/withLoading";
 import { useAsyncApi } from "../../hooks/useApi";
 import countryObj from "./type.json";
+import debounce from "lodash/debounce";
+
 type CountryType = typeof countryObj;
 
 const CountriesListWithLoading = withLoading<any>(CountriesList);
@@ -15,12 +17,19 @@ async function getCountriesApi(s: string) {
 }
 function SearchCountriesPage() {
   const [search, setSearch] = useState("");
+
   const { isLoading, data, error } = useAsyncApi<Array<CountryType>>(
     getCountriesApi,
     [],
     search
   );
-
+  console.log(data);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (!value) return;
+    setSearch(e?.target?.value);
+  };
+  const textChangeHandlerDeb = debounce(handleSearchChange, 300);
   if (error.errorMessage)
     return <h1 style={{ textAlign: "center" }}> {error.errorMessage} </h1>;
   return (
@@ -28,10 +37,8 @@ function SearchCountriesPage() {
       <div style={{ marginTop: "20px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <input
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setSearch(e?.target?.value);
-            }}
-            value={search}
+            onChange={textChangeHandlerDeb}
+            // value={search}
             placeholder="search country..."
             type="text"
           />
