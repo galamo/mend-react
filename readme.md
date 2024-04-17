@@ -310,6 +310,12 @@ npm run dev
 - useContext
 - useReducer
 
+## Custom hooks
+
+- useApi
+- useImage
+- slow network bug
+
 ## Controled vs unControled components
 
 ## Ref
