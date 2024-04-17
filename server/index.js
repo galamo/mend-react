@@ -59,6 +59,29 @@ app.get("/countries/data", async (req, res, next) => {
   }
 });
 
+let delayName2 = 0;
+app.get("/countries/search", async (req, res, next) => {
+  delayName2++;
+  const { query } = req;
+  try {
+    const d = data.filter((c) =>
+      c.name.common.toLowerCase().includes(query?.name?.toLowerCase())
+    );
+    // const { data } = await axios.get(
+    //   `https://restcountries.com/v3.1/name/${req.params.name}`
+    // );
+    if (delayName2 % 2 === 0) {
+      setTimeout(() => {
+        return res.json({ data: d });
+      }, 2000);
+    } else {
+      return res.json({ data: d });
+    }
+  } catch (error) {
+    return next(error);
+  }
+});
+
 let delayName = 0;
 app.get("/countries-delay/name/:name", async (req, res, next) => {
   delayName++;
