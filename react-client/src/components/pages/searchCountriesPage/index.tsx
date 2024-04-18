@@ -3,8 +3,9 @@ import axios from "axios";
 import { withLoading } from "../../hoc/withLoading";
 import { useAsyncApi } from "../../../hooks/useApi";
 import countryObj from "./type.json";
+import debounce from "lodash/debounce";
 type CountryType = typeof countryObj;
-
+console.log(debounce);
 const CountriesListWithLoading = withLoading<any>(CountriesList);
 
 async function getCountriesApi(s: string) {
@@ -19,7 +20,11 @@ function SearchCountriesPage() {
     [],
     search
   );
-
+  function searchHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.value) return;
+    setSearch(e?.target?.value);
+  }
+  const searchHandlerDebounce = debounce(searchHandler, 400);
   if (error.errorMessage)
     return <h1 style={{ textAlign: "center" }}> {error.errorMessage} </h1>;
   return (
@@ -27,10 +32,8 @@ function SearchCountriesPage() {
       <div style={{ marginTop: "20px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <input
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setSearch(e?.target?.value);
-            }}
-            value={search}
+            onChange={searchHandlerDebounce}
+            // value={search}
             placeholder="search country..."
             type="text"
           />
@@ -44,19 +47,22 @@ function SearchCountriesPage() {
           justifyContent: "center",
         }}
       >
-        <CountriesListWithLoading users={data} isLoading={isLoading} />
+        <CountriesListWithLoading countries={data} isLoading={isLoading} />
       </div>
     </>
   );
 }
 
-function CountriesList(props: { users: Array<CountryType> }) {
+export function CountriesList(props: { countries: Array<CountryType> }) {
   return (
     <>
-      {Array.isArray(props.users) &&
-        props.users.map((c: CountryType) => {
+      {Array.isArray(props.countries) &&
+        props.countries.map((c: CountryType) => {
           return (
-            <div style={{ width: "20%", padding: "10px", textAlign: "center" }}>
+            <div
+              key={c.name.official}
+              style={{ width: "20%", padding: "10px", textAlign: "center" }}
+            >
               <h6>{c?.name.official}</h6>
               <img height={150} width={150} src={c?.flags?.png} alt="" />
             </div>

@@ -3,7 +3,9 @@ import { SingleUser } from "../../ui/user/index";
 import { withLoading } from "../../hoc/withLoading";
 import { useAsyncApi } from "../../../hooks/useApi";
 import countryObj from "./type.json";
+import { CountriesList } from "../searchCountriesPage";
 type CountryType = typeof countryObj;
+
 
 const CountriesListWithLoading = withLoading<any>(CountriesList);
 
@@ -29,25 +31,10 @@ function CountriesPage() {
           justifyContent: "center",
         }}
       >
-        <CountriesListWithLoading users={data} isLoading={isLoading} />
+        <CountriesListWithLoading countries={data} isLoading={isLoading} />
       </div>
     </>
   );
 }
 
-function CountriesList(props: { users: Array<CountryType> }) {
-  return (
-    <>
-      {Array.isArray(props.users) &&
-        props.users.map((c: CountryType) => {
-          return (
-            <div style={{ width: "20%", padding: "10px", textAlign: "center" }}>
-              <h6>{c?.name.official}</h6>
-              <img height={150} width={150} src={c?.flags?.png} alt="" />
-            </div>
-          );
-        })}
-    </>
-  );
-}
 export default CountriesPage;
