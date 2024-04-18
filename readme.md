@@ -316,7 +316,7 @@ npm run dev
 - useImage
 - slow network bug ( debounce, isActive)
 
-## useMemo
+## Ex_useMemo
 
 - Create a Statistcs page based on material ui Bar chart.
 - The cart will present the number of population per region.
