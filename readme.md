@@ -322,6 +322,10 @@ npm run dev
 - The cart will present the number of population per region.
 - use useMemo - to prevent the population per region re executed.
 
+## Ex_suspense
+
+- Support Suspense in users page
+
 ## Controled vs unControled components
 
 ## Ref
