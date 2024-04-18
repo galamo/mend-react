@@ -9,6 +9,8 @@ import CountriesStatsPage from "./components/pages/countriesStatsPage";
 import CountriesLoaderPage, {
   loader as countriesLoader,
 } from "./components/pages/countriesLoaderPage";
+import SettingsProvider from "./components/providers/settingsProvider";
+import SettingsPage from "./components/pages/settingsPage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,11 @@ const router = createBrowserRouter([
         path: "/stats",
         element: <CountriesStatsPage />,
       },
+
+      {
+        path: "/settings",
+        element: <SettingsPage />,
+      },
       {
         path: "/countries-loader-page",
         element: <CountriesLoaderPage />,
@@ -53,7 +60,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <SettingsProvider>
+        <RouterProvider router={router} />
+      </SettingsProvider>
     </>
   );
 }

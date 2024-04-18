@@ -4,8 +4,9 @@ import { withLoading } from "../../hoc/withLoading";
 import { useAsyncApi } from "../../../hooks/useApi";
 import countryObj from "./type.json";
 import { CountriesList } from "../searchCountriesPage";
+import { ApplicationDate } from "../../app/applicationDate";
+import { createPortal } from "react-dom";
 type CountryType = typeof countryObj;
-
 
 const CountriesListWithLoading = withLoading<any>(CountriesList);
 
@@ -23,6 +24,9 @@ function CountriesPage() {
     return <h1 style={{ textAlign: "center" }}> {error.errorMessage} </h1>;
   return (
     <>
+      <h2>
+        Date is correct for <ApplicationDate date={new Date().toString()} />
+      </h2>
       <div
         style={{
           display: "flex",
@@ -31,6 +35,20 @@ function CountriesPage() {
           justifyContent: "center",
         }}
       >
+        {createPortal(
+          <h1
+            style={{
+              opacity: 0.5,
+              position: "fixed",
+              left: "20%",
+              top: "10%",
+              height: "100vh",
+            }}
+          >
+            Rendered in another element of the DOM {data.length}
+          </h1>,
+          document.getElementById("modal")
+        )}
         <CountriesListWithLoading countries={data} isLoading={isLoading} />
       </div>
     </>
