@@ -54,6 +54,7 @@ function SearchCountriesPage() {
 }
 
 export function CountriesList(props: { countries: Array<CountryType> }) {
+  console.log("countries list - render as fetch");
   return (
     <>
       {Array.isArray(props.countries) &&

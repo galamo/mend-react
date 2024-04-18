@@ -6,6 +6,9 @@ import MainNavigation from "./components/app/navigation/MainNavigation";
 import Home from "./components/pages/homePage";
 import SearchCountriesPage from "./components/pages/searchCountriesPage";
 import CountriesStatsPage from "./components/pages/countriesStatsPage";
+import CountriesLoaderPage, {
+  loader as countriesLoader,
+} from "./components/pages/countriesLoaderPage";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +35,11 @@ const router = createBrowserRouter([
       {
         path: "/stats",
         element: <CountriesStatsPage />,
+      },
+      {
+        path: "/countries-loader-page",
+        element: <CountriesLoaderPage />,
+        loader: countriesLoader,
       },
 
       {
