@@ -5,6 +5,7 @@ import CountriesPage from "./components/pages/countriesPage";
 import MainNavigation from "./components/app/navigation/MainNavigation";
 import Home from "./components/pages/homePage";
 import SearchCountriesPage from "./components/pages/searchCountriesPage";
+import CountriesStatsPage from "./components/pages/countriesStatsPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/search-countries",
         element: <SearchCountriesPage />,
+      },
+      {
+        path: "/stats",
+        element: <CountriesStatsPage />,
       },
 
       {

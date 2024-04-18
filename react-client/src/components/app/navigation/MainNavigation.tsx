@@ -37,6 +37,12 @@ function MainNavigation() {
             </NavLink>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <NavLink style={{ color: "white" }} to="/stats">
+              Countries Stats Page
+            </NavLink>
+          </Typography>
+
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <NavLink style={{ color: "white" }} to="/search-countries">
               Search Countries
             </NavLink>
