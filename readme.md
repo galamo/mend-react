@@ -316,6 +316,12 @@ npm run dev
 - useImage
 - slow network bug ( debounce, isActive)
 
+## useMemo
+
+- Create a Statistcs page based on material ui Bar chart.
+- The cart will present the number of population per region.
+- use useMemo - to prevent the population per region re executed.
+
 ## Controled vs unControled components
 
 ## Ref
