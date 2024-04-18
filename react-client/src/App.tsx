@@ -11,6 +11,8 @@ import CountriesLoaderPage, {
 } from "./components/pages/countriesLoaderPage";
 import SettingsProvider from "./components/providers/settingsProvider";
 import SettingsPage from "./components/pages/settingsPage";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const router = createBrowserRouter([
   {
@@ -60,9 +62,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <SettingsProvider>
-        <RouterProvider router={router} />
-      </SettingsProvider>
+      <Provider store={store}>
+        <SettingsProvider>
+          <RouterProvider router={router} />
+        </SettingsProvider>
+      </Provider>
     </>
   );
 }

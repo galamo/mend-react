@@ -5,7 +5,6 @@ import { useAsyncApi } from "../../../hooks/useApi";
 import countryObj from "./type.json";
 import debounce from "lodash/debounce";
 type CountryType = typeof countryObj;
-console.log(debounce);
 const CountriesListWithLoading = withLoading<any>(CountriesList);
 
 async function getCountriesApi(s: string) {
