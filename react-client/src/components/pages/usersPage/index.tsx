@@ -67,11 +67,22 @@ function UsersList(props: { users: Array<SingleUser> }) {
   return (
     <>
       {Array.isArray(props.users) &&
-        props.users.map((singleUser: SingleUser) => {
+        props.users.map((singleUser: SingleUser, index: number) => {
+          let user = singleUser;
+          // breaking image url on index = 3
+          if (index === 3) {
+            user = {
+              ...singleUser,
+              picture: {
+                ...singleUser.picture,
+                large: singleUser.picture.large + "ShouldNotWork",
+              },
+            };
+          }
           return (
             <UserCard
               key={`${singleUser.name.first}-${singleUser.name.last}`}
-              user={singleUser}
+              user={user}
             />
           );
         })}
