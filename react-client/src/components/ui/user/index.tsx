@@ -21,8 +21,8 @@ export function UserCard(props: { user: SingleUser }) {
           {user?.name?.first}
           {user?.name?.last}
         </Typography>
-        <ImageComponent  image={user?.picture?.large}/>
-       
+        <ImageComponent image={user?.picture?.large} />
+
         <Typography variant="h5" component="div"></Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {user.phone}

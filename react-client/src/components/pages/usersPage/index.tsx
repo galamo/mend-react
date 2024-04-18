@@ -1,9 +1,9 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import axios from "axios";
-import { SingleUser, UserCard } from "../user/index";
+import { SingleUser, UserCard } from "../../ui/user/index";
 import Button from "@mui/material/Button";
-import { WithLoadingProps, withLoading } from "../hoc/withLoading";
-import { useAsyncApi } from "../../hooks/useApi";
+import { WithLoadingProps, withLoading } from "../../hoc/withLoading";
+import { useAsyncApi } from "../../../hooks/useApi";
 
 type UsersProps = {
   users: Array<SingleUser>;

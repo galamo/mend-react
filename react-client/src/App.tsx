@@ -1,14 +1,10 @@
-import { useState, useEffect, ChangeEvent } from "react";
-// import "./App.css";
-// import { Country } from "./components/country";
-
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import UsersPage from "./components/usersPage";
-import CountriesPage from "./components/countriesPage";
+import UsersPage from "./components/pages/usersPage";
+import CountriesPage from "./components/pages/countriesPage";
 
-import MainNavigation from "./navigation/MainNavigation";
-import Home from "./components/home";
-import SearchCountriesPage from "./components/searchCountriesPage";
+import MainNavigation from "./components/app/navigation/MainNavigation";
+import Home from "./components/pages/homePage";
+import SearchCountriesPage from "./components/pages/searchCountriesPage";
 
 const router = createBrowserRouter([
   {

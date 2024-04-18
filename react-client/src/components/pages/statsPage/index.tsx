@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import { SingleUser } from "../user/index";
-import { withLoading } from "../hoc/withLoading";
-import { useAsyncApi } from "../../hooks/useApi";
+import { SingleUser } from "../../ui/user/index";
+import { withLoading } from "../../hoc/withLoading";
+import { useAsyncApi } from "../../../hooks/useApi";
 import countryObj from "./type.json";
 type CountryType = typeof countryObj;
 
@@ -13,7 +13,7 @@ async function getCountriesApi(s: string) {
   const result = await axios.get(url);
   return result.data.data;
 }
-function SearchCountriesPage() {
+function StatsPage() {
   const [search, setSearch] = useState("");
   const { isLoading, data, error } = useAsyncApi<Array<CountryType>>(
     getCountriesApi,
@@ -66,4 +66,4 @@ function CountriesList(props: { users: Array<CountryType> }) {
     </>
   );
 }
-export default SearchCountriesPage;
+export default StatsPage;

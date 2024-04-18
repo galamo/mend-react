@@ -1,7 +1,7 @@
 import axios from "axios";
-import { SingleUser } from "../user/index";
-import { withLoading } from "../hoc/withLoading";
-import { useAsyncApi } from "../../hooks/useApi";
+import { SingleUser } from "../../ui/user/index";
+import { withLoading } from "../../hoc/withLoading";
+import { useAsyncApi } from "../../../hooks/useApi";
 import countryObj from "./type.json";
 type CountryType = typeof countryObj;
 
