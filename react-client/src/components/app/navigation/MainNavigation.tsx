@@ -67,7 +67,11 @@ function MainNavigation() {
               Search Countries
             </NavLink>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">
+            <NavLink style={{ color: "white" }} to="/login">
+              Login
+            </NavLink>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

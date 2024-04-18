@@ -13,6 +13,7 @@ import SettingsProvider from "./components/providers/settingsProvider";
 import SettingsPage from "./components/pages/settingsPage";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import Login from "./components/pages/loginPage";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,10 @@ const router = createBrowserRouter([
         path: "/stats",
         element: <CountriesStatsPage />,
       },
-
+      {
+        path: "/login",
+        element: <Login />,
+      },
       {
         path: "/settings",
         element: <SettingsPage />,
